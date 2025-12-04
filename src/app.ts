@@ -11,9 +11,26 @@ import config from './config';
 
 const app: Application = express();
 
-// CORS configuration - restrict to specific origins in production
+// CORS configuration - support multiple domains
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://news-portal-client-taupe.vercel.app',
+  'https://www.channeldonews.com',
+  'https://channeldonews.com'
+];
+
 const corsOptions = {
-  origin: config.cors_origin || ['http://localhost:3000', 'https://news-portal-client-taupe.vercel.app'],
+  origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+    // Allow requests with no origin (like mobile apps or Postman)
+    if (!origin) return callback(null, true);
+
+    // Check if origin is in allowed list
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   optionsSuccessStatus: 200
 };

@@ -13,7 +13,7 @@ const app: Application = express();
 
 // CORS configuration - restrict to specific origins in production
 const corsOptions = {
-  origin: (config as any).cors_origin || ['http://localhost:3000', 'https://news-portal-client-taupe.vercel.app'],
+  origin: config.cors_origin || ['http://localhost:3000', 'https://news-portal-client-taupe.vercel.app'],
   credentials: true,
   optionsSuccessStatus: 200
 };

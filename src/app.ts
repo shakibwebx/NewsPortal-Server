@@ -13,9 +13,7 @@ const app: Application = express();
 
 // CORS configuration - restrict to specific origins in production
 const corsOptions = {
-  origin: config.node_env === 'production'
-    ? ['https://yourdomain.com', 'https://www.yourdomain.com'] // Update with your actual domain
-    : ['http://localhost:3000', 'http://localhost:3001'],
+  origin: (config as any).cors_origin || 'http://localhost:3000',
   credentials: true,
   optionsSuccessStatus: 200
 };

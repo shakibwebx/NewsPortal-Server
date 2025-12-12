@@ -5,6 +5,7 @@ import { NewsRoutes } from './app/modules/news/news.routes';
 import { CategoryRoutes } from './app/modules/category/category.routes';
 import { CommentRoutes } from './app/modules/comment/comment.routes';
 import { AuthRoutes } from './app/modules/auth/auth.routes';
+import { SettingsRoutes } from './app/modules/settings/settings.route';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import notFound from './app/middlewares/notFound';
 import config from './config';
@@ -72,6 +73,7 @@ app.use('/api/auth', authLimiter, AuthRoutes); // Stricter limit for auth
 app.use('/api/news', apiLimiter, NewsRoutes);
 app.use('/api/categories', apiLimiter, CategoryRoutes);
 app.use('/api/comments', apiLimiter, CommentRoutes);
+app.use('/api/settings', apiLimiter, SettingsRoutes);
 
 // Global error handler
 app.use(globalErrorHandler);

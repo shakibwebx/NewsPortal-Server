@@ -8,6 +8,7 @@ export interface INews extends Document {
   summary: string;
   author: string;
   category: any;
+  upazila?: string;
   tags: string[];
   image: string;
   isFeatured: boolean;
@@ -22,6 +23,7 @@ export interface INews extends Document {
 
 export interface INewsQuery {
   category?: string;
+  upazila?: string;
   featured?: boolean;
   page?: number;
   limit?: number;

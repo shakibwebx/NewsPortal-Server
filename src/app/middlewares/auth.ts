@@ -21,8 +21,15 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     (req as any).user = decoded;
 
     next();
-  } catch (error) {
-    next(new AppError(401, 'Invalid or expired token'));
+  } catch (error: any) {
+    console.error('Auth middleware error:', error.message);
+    if (error.name === 'JsonWebTokenError') {
+      next(new AppError(401, 'Invalid token'));
+    } else if (error.name === 'TokenExpiredError') {
+      next(new AppError(401, 'Token expired'));
+    } else {
+      next(new AppError(401, error.message || 'Invalid or expired token'));
+    }
   }
 };
 

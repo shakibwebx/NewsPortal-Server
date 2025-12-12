@@ -35,6 +35,12 @@ const NewsSchema: Schema = new Schema(
       ref: 'Category',
       required: true,
     },
+    upazila: {
+      type: String,
+      enum: ['chuadanga-sadar', 'alamdanga', 'damurhuda', 'jibannagar', ''],
+      default: '',
+      trim: true,
+    },
     tags: [{
       type: String,
       trim: true,
